@@ -59,7 +59,7 @@
       opacity: 0;
     }
 
-    #message {
+/*     #message {
       font-size: 1.5em;
       margin-top: 30px;
       max-width: 600px;
@@ -68,7 +68,19 @@
       border-right: 4px solid white;
       font-weight: 500;
       animation: typing 5s steps(60, end), blink-caret 0.75s step-end infinite;
-    }
+    } */
+    #message {
+  font-size: 1.5em;
+  margin-top: 30px;
+  max-width: 600px;
+  overflow: hidden;
+  word-wrap: break-word;
+  font-weight: 500;
+  border-right: 4px solid white;
+  animation: typing 7s steps(90, end), blink-caret 0.75s step-end infinite;
+  white-space: normal; /* Allow wrapping */
+}
+
 
     @keyframes typing {
       from { width: 0 }
