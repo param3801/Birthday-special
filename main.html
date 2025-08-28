@@ -3,71 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Surprise for Vijay Bhiya 🎉</title>
+  <title>Happy Birthday Vijay Bhiya</title>
   <style>
     body {
       margin: 0;
+      overflow: hidden;
       font-family: 'Segoe UI', sans-serif;
-      background: #111;
+      background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
       color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
-      text-align: center;
     }
 
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 40px;
-      opacity: 1;
+      font-size: 3em;
+      text-align: center;
       animation: fadeIn 2s ease-in-out;
-    }
-
-    button {
-      padding: 15px 30px;
-      font-size: 1.2em;
-      background: #fdd365;
-      border: none;
-      color: #222;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-    }
-
-    #surpriseContainer {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    #vijayImage {
-      width: 200px;
-      height: 250px;
-      border-radius: 50%;
-      margin-top: 20px;
-      border: 5px solid white;
-      box-shadow: 0 0 20px rgba(255,255,255,0.4);
-      animation: fadeInImage 2s ease-in-out forwards;
-      opacity: 0;
+      z-index: 2;
     }
 
     #message {
       font-size: 1.5em;
-      margin-top: 30px;
+      text-align: center;
       max-width: 600px;
+      margin-top: 20px;
       white-space: nowrap;
       overflow: hidden;
       border-right: 4px solid white;
-      font-weight: 500;
-      animation: typing 5s steps(60, end), blink-caret 0.75s step-end infinite;
+      animation: typing 6s steps(40, end), blink-caret 0.75s step-end infinite;
     }
 
     @keyframes typing {
@@ -85,18 +51,15 @@
       to { opacity: 1 }
     }
 
-    @keyframes fadeInImage {
-      to { opacity: 1 }
-    }
-
     .balloon {
       position: absolute;
       bottom: -150px;
       width: 60px;
       height: 80px;
+      background-color: #ff5e78;
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
       animation: floatUp 10s infinite ease-in;
-      opacity: 0.9;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .balloon::after {
@@ -106,7 +69,7 @@
       left: 50%;
       width: 2px;
       height: 30px;
-      background: white;
+      background: #fff;
       transform: translateX(-50%);
     }
 
@@ -115,111 +78,61 @@
       100% { transform: translateY(-120vh) scale(1.1); opacity: 0; }
     }
 
-    canvas {
-      position: fixed;
-      pointer-events: none;
-      top: 0;
-      left: 0;
-      z-index: 1;
+    button {
+      background: white;
+      color: #f76b1c;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      margin-top: 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
-  <h1>Hey Vijay Bhiya 👋</h1>
-  <button onclick="revealSurprise()">🎁 Click to Reveal Your Surprise 🎉</button>
+  <h1>🎉 Happy Birthday Vijay Bhiya 🎉</h1>
+  <div id="message"></div>
+  <button onclick="playMusic()">Play Birthday Song 🎶</button>
 
-  <div id="surpriseContainer">
-    <img id="vijayImage" src="vijay.png" alt="Vijay Bhiya">
-    <div id="message"></div>
-  </div>
-
-  <canvas id="confettiCanvas"></canvas>
-
+  <!-- Add Balloons -->
   <script>
-    // Confetti effect
-    const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
-    let confetti = [];
+    const colors = ['#ff5e78', '#6a67ce', '#fdd365', '#4dd091', '#f76b1c'];
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    for (let i = 0; i < 30; i++) {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      const left = Math.random() * 100;
+      balloon.style.left = `${left}vw`;
+      balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.animationDuration = `${6 + Math.random() * 5}s`;
+      document.body.appendChild(balloon);
     }
 
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function createConfettiPiece() {
-      return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height - canvas.height,
-        color: `hsl(${Math.random() * 360}, 100%, 60%)`,
-        size: Math.random() * 10 + 5,
-        speedY: Math.random() * 3 + 2,
-        speedX: (Math.random() - 0.5) * 2
-      };
-    }
-
-    function updateConfetti() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      confetti.forEach((c, i) => {
-        c.y += c.speedY;
-        c.x += c.speedX;
-        ctx.fillStyle = c.color;
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (c.y > canvas.height) {
-          confetti[i] = createConfettiPiece();
-        }
-      });
-      requestAnimationFrame(updateConfetti);
-    }
-
-    function startConfetti() {
-      confetti = new Array(100).fill().map(createConfettiPiece);
-      updateConfetti();
-    }
-
-    // Surprise logic
-    function revealSurprise() {
-      document.querySelector('button').style.display = 'none';
-      document.querySelector('h1').textContent = "🎉 Happy Birthday Vijay Bhiya! 🎉";
-      document.getElementById('surpriseContainer').style.display = 'flex';
-
-      // Show Vijay image
-      document.getElementById('vijayImage').style.animationDelay = '1s';
-
-      // Create Balloons
-      const colors = ['#ff5e78', '#6a67ce', '#fdd365', '#4dd091', '#f76b1c'];
-      for (let i = 0; i < 20; i++) {
-        const balloon = document.createElement('div');
-        balloon.className = 'balloon';
-        balloon.style.left = `${Math.random() * 100}vw`;
-        balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        balloon.style.animationDuration = `${6 + Math.random() * 5}s`;
-        document.body.appendChild(balloon);
+    // Typewriter effect
+    const msg = "Wishing you a day filled with love, laughter, and endless happiness. You're truly special, Vijay Bhiya! 🎂🎈";
+    let i = 0;
+    const speed = 50;
+    function typeWriter() {
+      if (i < msg.length) {
+        document.getElementById("message").textContent += msg.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
       }
+    }
+    typeWriter();
 
-      // Play Music
-      const audio = new Audio('happy-birthday-357371.mp3');
+    // Music play function
+    function playMusic() {
+      
+      const audio = new Audio('happy-birthday-357371.mp3')
       audio.play();
-
-      // Start Confetti
-      startConfetti();
-
-      // Start Typing Message
-      const msg = "Wishing you joy, love, and success on your special day! You're truly one in a million, Vijay Bhiya! 🎂💫";
-      let i = 0;
-      function typeWriter() {
-        if (i < msg.length) {
-          document.getElementById("message").textContent += msg.charAt(i);
-          i++;
-          setTimeout(typeWriter, 40);
-        }
-      }
-      setTimeout(typeWriter, 1000);
     }
   </script>
 </body>
